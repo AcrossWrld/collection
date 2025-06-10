@@ -2,11 +2,11 @@
 import { config } from 'dotenv';
 config();
 
-import './flows/answer-questions.ts';
-import './flows/process-pdf.ts';
-import './flows/suggest-initial-question.ts';
-import './flows/suggest-follow-up-question.ts';
-import './flows/evaluate-quiz-answer.ts';
-import './flows/generate-quiz-questions.ts';
-import './flows/summarize-pdf.ts';
-import './flows/extract-keywords.ts';
+import './flow/answer-questions';
+import './flows/process-pdf';
+import './flows/suggest-initial-question';
+import './flows/suggest-follow-up-question';
+import './flows/evaluate-quiz-answer';
+import './flows/generate-quiz-questions';
+import './flows/summarize-pdf';
+import './flows/extract-keywords';
