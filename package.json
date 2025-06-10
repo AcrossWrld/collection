@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'npm run build && npm run start'",
     "build": "tsc",
-    "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
-    "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
+    "genkit:dev": "genkit start -- tsx dist/ai/dev.js",
+    "genkit:watch": "genkit start -- tsx --watch dist/ai/dev.js",
     "start": "node dist/index.js"
   },
   "author": "Google LLC",
