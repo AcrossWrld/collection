@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// index.js
+exports.ai = void 0;
 var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var answer_questions_1 = require("./ai/flow/answer-questions");
@@ -50,10 +50,16 @@ var process_pdf_1 = require("./ai/flow/process-pdf");
 var suggest_follow_up_question_1 = require("./ai/flow/suggest-follow-up-question");
 var suggest_initial_question_1 = require("./ai/flow/suggest-initial-question");
 var summarize_pdf_1 = require("./ai/flow/summarize-pdf");
-var dotenv_1 = require("dotenv");
-(0, dotenv_1.config)();
+var dotenv_1 = __importDefault(require("dotenv"));
+var genkit_1 = require("genkit");
+var googleai_1 = require("@genkit-ai/googleai");
+dotenv_1.default.config();
+exports.ai = (0, genkit_1.genkit)({
+    plugins: [(0, googleai_1.googleAI)()],
+    model: 'googleai/gemini-2.0-flash',
+});
 var app = (0, express_1.default)();
-var port = 3000;
+var port = process.env.PORT || 3000;
 app.use(body_parser_1.default.json());
 // Route 1: PDF Question Answering
 app.post('/api/answer', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {

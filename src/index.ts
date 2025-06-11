@@ -1,4 +1,3 @@
-// index.js
 import express from 'express';
 import bodyParser from 'body-parser';
 import { answerQuestions } from './ai/flow/answer-questions';
@@ -9,12 +8,19 @@ import { processPdf } from './ai/flow/process-pdf';
 import { suggestFollowUpQuestion } from './ai/flow/suggest-follow-up-question'; 
 import { suggestInitialQuestion } from './ai/flow/suggest-initial-question'; 
 import { summarizePdf } from './ai/flow/summarize-pdf'; 
-import { config } from 'dotenv';
+import dotenv from 'dotenv';
+import {genkit} from 'genkit';
+import {googleAI} from '@genkit-ai/googleai';
 
 
-config();
+dotenv.config();
+export const ai = genkit({
+  plugins: [googleAI()],
+  model: 'googleai/gemini-2.0-flash',
+});
+
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -51,7 +57,6 @@ app.post('/api/evaluate', async (req, res) => {
     res.status(500).json({ error: 'Failed to evaluate answer' });
   }
 });
-
 
 //Route 3: Keyword Extractor
 app.post('/api/keywords', async (req, res) => {
@@ -161,6 +166,12 @@ app.post('/api/summarize-pdf', async (req, res) => {
   }
 });
 
+// Health check
+app.get('/', (req, res) => {
+  res.send('Genkit API is running.');
+});
+
+// Start the server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server listening on port ${port}`);
 });
