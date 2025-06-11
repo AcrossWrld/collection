@@ -267,7 +267,12 @@ app.post('/api/summarize-pdf', function (req, res) { return __awaiter(void 0, vo
         }
     });
 }); });
+// Health check
+app.get('/', function (req, res) {
+    res.send('Genkit API is running.');
+});
+// Start the server
 app.listen(port, function () {
-    console.log("Server running at http://localhost:".concat(port));
+    console.log("Server listening on port ".concat(port));
 });
 //# sourceMappingURL=index.js.map

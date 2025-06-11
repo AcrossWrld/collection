@@ -168,6 +168,7 @@ app.post('/api/summarize-pdf', async (req, res) => {
 
 // Health check
 app.get('/', (req, res) => {
+  console.log("Genkit API is running.")
   res.send('Genkit API is running.');
 });
 
