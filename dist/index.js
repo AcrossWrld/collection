@@ -269,6 +269,7 @@ app.post('/api/summarize-pdf', function (req, res) { return __awaiter(void 0, vo
 }); });
 // Health check
 app.get('/', function (req, res) {
+    console.log("Genkit API is running.");
     res.send('Genkit API is running.');
 });
 // Start the server
